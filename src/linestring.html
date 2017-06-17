@@ -20,8 +20,6 @@
 <body>
     <div id="map" class="map"></div>
     <script type="text/javascript">
-        //图标
-        var icon = "../image/map_trace_blue.png";
         //箭头
         var arrow = "../image/arrow.png";
         //起始位置
@@ -105,9 +103,14 @@
             });  
             // 设置样式，在样式中就可以设置图标
             anchor.setStyle(new ol.style.Style({
-                image: new ol.style.Icon({
-                    anchor:[0.5,1],
-                    src: icon
+                image: new ol.style.Circle({  
+                    radius: 10,  
+                    stroke: new ol.style.Stroke({  
+                        color: '#fff'  
+                    }),  
+                    fill: new ol.style.Fill({  
+                        color: '#3399CC'  
+                    })  
                 })
             }));
             // 添加到之前的创建的layer中去
