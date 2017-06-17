@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin:0px;
+        }
+        .map{
+            width:100%;
+            height:100%;
+            margin:0px;
+        }
+    </style>
+    <script src="https://openlayers.org/en/v4.2.0/build/ol.js" type="text/javascript"></script>
+    <title>My footprint</title>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <script type="text/javascript">
+
+        var icon = "https://github.com/13608089849/Openlayer3-LineString/blob/master/image/map_trace_blue.png";
+
+        var arrow = "https://github.com/13608089849/Openlayer3-LineString/blob/master/image/arrow.png"
+
+        //起始位置
+        var center = [103.9271879196, 30.7462617980];
+        //标记点集
+        var vector = new ol.layer.Vector({
+            source: source,
+            style: styleFunction
+        });
+        //标记层
+        var layer = new ol.layer.Vector({
+            source: new ol.source.Vector()
+        });
+        var geometry = new ol.geom.LineString();
+        //散列点数组
+        var coordinate = new Array();
+        //散列点
+        var coordinate1 = [104.1005229950, 30.6743128087];
+        var coordinate2 = [103.9271879196, 30.7462617980];
+        var coordinate3 = [103.6227035522, 30.9932085864];
+        var coordinate4 = [103.5752069950, 31.4663367378];
+        var coordinate5 = [103.4307861328, 30.1941019446];
+        var coordinate6 = [106.5885615349, 29.5679608922];
+        var coordinate7 = [106.4500522614, 29.5811456252];
+        var coordinate8 = [107.7666950226, 29.4161988273];
+        var coordinate9 = [118.1862562895, 24.4891501310];
+        var coordinate10 = [118.1982564926, 24.4947641146];
+
+        coordinate.push(coordinate1);
+        coordinate.push(coordinate2);
+        coordinate.push(coordinate3);
+        coordinate.push(coordinate4);
+        coordinate.push(coordinate5);
+        coordinate.push(coordinate6);
+        coordinate.push(coordinate7);
+        coordinate.push(coordinate8);
+        coordinate.push(coordinate9);
+        coordinate.push(coordinate10);
+        //标记数据集
+        var source = new ol.source.Vector();
+
+        for (var i = 0; i < coordinate.length; i++) {
+            geometry.appendCoordinate(ol.proj.transform(coordinate[i], 'EPSG:4326', 'EPSG:3857'));
+            // 创建一个Feature，并设置好在地图上的位置
+            var anchor = new ol.Feature({
+                geometry: new ol.geom.Point(ol.proj.transform(coordinate[i], 'EPSG:4326', 'EPSG:3857'))
+            });
+            // 设置样式，在样式中就可以设置图标
+            anchor.setStyle(new ol.style.Style({
+                image: new ol.style.Icon({
+                    anchor:[0.5,1],
+                    src: icon
+                })
+            }));
+            // 添加到之前的创建的layer中去
+            layer.getSource().addFeature(anchor);
+        }
+        var feature = new ol.Feature({  
+            geometry:geometry
+        });
+        source.addFeature(feature);
+
+        //获取样式
+        var styleFunction = function(feature) {
+            var geometry = feature.getGeometry();
+            //线段样式
+            var styles = [
+            new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: '#0044CC'
+                }), 
+                stroke: new ol.style.Stroke({  
+                    lineDash:[1,2,3,4,5,6],
+                    width: 3,  
+                    color: [255, 0, 0, 1]  
+                })  
+            })
+            ];
+            //箭头样式
+            geometry.forEachSegment(function(start, end) {
+                var arrowLonLat = [(end[0]+start[0])/2,(end[1]+start[1])/2];
+                var dx = end[0]- start[0]; 
+                var dy = end[1] - start[1];
+                var rotation = Math.atan2(dy, dx);
+                styles.push(new ol.style.Style({
+                    geometry: new ol.geom.Point(arrowLonLat),
+                    image: new ol.style.Icon({
+                        src: arrow,
+                        anchor: [0.75, 0.5],
+                        rotateWithView: true,
+                        rotation: -rotation
+                    })
+                }));
+            });
+            return styles;
+        };
+        
+        //地图层
+        var raster = new ol.layer.Tile({
+            source: new ol.source.OSM()
+        });
+        //总图层
+        var map = new ol.Map({
+            layers: [raster,vector,layer],
+            target: 'map',
+            view: new ol.View({
+                center: ol.proj.transform(center, 'EPSG:4326', 'EPSG:3857'),
+                zoom: 5
+            })
+        });
+    </script>
+</body>
+</html>
