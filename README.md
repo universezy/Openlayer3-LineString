@@ -80,5 +80,3 @@ geometry设置好后，feature也就完成了，然后把之后的几个步骤�
 
 附上效果图：
 ![](https://github.com/13608089849/Openlayer3-LineString/blob/master/image/linestring.png?raw=true)
-
-[Github源码](https://github.com/13608089849/Openlayer3-LineString)
