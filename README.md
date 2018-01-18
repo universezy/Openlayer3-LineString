@@ -1,4 +1,4 @@
-关于LineString，官方的示例给的是鼠标画点，自动连线，并添加箭头（LineString Arrows示例），而在我们实际应用中，往往需要手动录入标记点，然后进行连线并添加箭头，下面就分享我使用LineString的过程：
+关于LineString，官方的示例给的是鼠标画点，自动连线，并添加箭头（[LineString Arrows示例](http://openlayers.org/en/latest/examples/line-arrows.html?q=linestring)），而在我们实际应用中，往往需要手动录入标记点，然后进行连线并添加箭头，下面就分享我使用LineString的过程：
 
 首先还是静态数据的：
 
