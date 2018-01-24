@@ -1,11 +1,11 @@
-#Openlayer3学习心得之LineString#
+# Openlayer3学习心得之LineString
 
-**前言**
+## 前言
 
 关于LineString，官方的示例给的是鼠标画点，自动连线，并添加箭头（[LineString Arrows示例](http://openlayers.org/en/latest/examples/line-arrows.html?q=linestring)），而在我们实际应用中，往往需要手动录入标记点，然后进行连线并添加箭头，下面就分享我使用LineString的过程：
 
 ---
-*1. 首先是静态数据的：*
+### 1. 首先是静态数据的：
 
 - 先准备一个source图层用来画点：
 
@@ -77,7 +77,7 @@ var myStyle = function(feature) {
 然后把地图层和这个linestring的图层vector一起加到map的layers里就完成了。**
 
 ---
-*2. 接下来说动态添加新的标记点：*
+### 2. 接下来说动态添加新的标记点：
 
 - geometry可以设为全局变量：
 
@@ -94,6 +94,6 @@ geometry.appendCoordinate(ol.proj.transform(newPoint, 'EPSG:4326', 'EPSG:3857'))
 **geometry设置好后，feature也就完成了，然后把之后的几个步骤中的变量更新一下就完成了。**
 
 ---
-*3. 效果图：*
+### 3. 效果图：
 
 ![](https://github.com/13608089849/Openlayer3-LineString/blob/master/image/linestring.png?raw=true)
