@@ -101,7 +101,7 @@ geometry.appendCoordinate(ol.proj.transform(newPoint, 'EPSG:4326', 'EPSG:3857'))
 ---
 ### 4. 在线体验:
 
-[Openlayers3-LineStringon-line](https://frogfans.github.io/res/html/openlayers3-linestring.html)
+[Openlayers3-LineString on-line](https://frogfans.github.io/res/html/openlayers3-linestring.html)
 
 
 ---
