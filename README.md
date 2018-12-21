@@ -9,13 +9,13 @@
 
 - 先准备一个source图层用来画点：
 
-````
+````javascript
 var source = new ol.source.Vector();
 ````
 
 - 然后是录入标记点的信息，所有点共同构成一个feature：
 
-````
+````javascript
 var feature = new ol.Feature({  
   				geometry:new ol.geom.LineString(coordinate1,coordinate2,coordinate3,coordinate4......)
   			});
@@ -23,13 +23,13 @@ var feature = new ol.Feature({
 
 - 然后把feature添加到source里：
 
-````
+````javascript
 source.addFeature(feature);
 ````
 
 - 接下来准备一个图层用来画线和箭头：
 
-````
+````javascript
 var vector = new ol.layer.Vector({
     		source: source,
     		style: myStyle
@@ -38,7 +38,7 @@ var vector = new ol.layer.Vector({
 
 - 这里的myStyle函数返回的是对线和箭头样式设置的style：
 
-````
+````javascript
 var myStyle = function(feature) {
     		var geometry = feature.getGeometry();
     		var styles = [
@@ -81,13 +81,13 @@ var myStyle = function(feature) {
 
 - geometry可以设为全局变量：
 
-````
+````javascript
 var geometry = new ol.geom.LineString();
 ````
 
 - 然后使用appendCoordinate添加点：
 
-````
+````javascript
 geometry.appendCoordinate(ol.proj.transform(newPoint, 'EPSG:4326', 'EPSG:3857'));
 ````
 
@@ -96,12 +96,12 @@ geometry.appendCoordinate(ol.proj.transform(newPoint, 'EPSG:4326', 'EPSG:3857'))
 ---
 ### 3. 效果图：
 
-![](https://github.com/frogfans/Openlayer3-LineString/blob/master/image/linestring.png?raw=true)
+![](image/linestring.png?raw=true)
 
 ---
 ### 4. 在线体验:
 
-[Openlayers3-LineString on-line](https://frogfans.github.io/res/html/openlayers3-linestring.html)
+[Openlayers3-LineString on-line](https://universezy.github.io/demo/openlayers3-linestring.html)
 
 
 ---
